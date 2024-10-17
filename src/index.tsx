@@ -1,7 +1,7 @@
-import Sample from "./layout/Sample";
+import MainLayout from "./layout/MainLayout";
 
 const Home = () => {
-  return <Sample />;
+  return <MainLayout />;
 };
 
 export default Home;
