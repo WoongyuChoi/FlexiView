@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
 import { useState } from "react";
 import { convertToTreeItems } from "../utils/MenuUtils";
-import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
 
 const TreeViewLayout = () => {
   const [lastClickedItem, setLastClickedItem] = useState<string | null>(null);

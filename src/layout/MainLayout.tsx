@@ -1,32 +1,37 @@
-import React from 'react';
-import { Box, Paper } from '@mui/material';
-import TreeViewLayout from './TreeViewLayout';
-import TextFieldLayout from './TextFieldLayout';
+import { Box, Paper } from "@mui/material";
+import TextFieldLayout from "./TextFieldLayout";
+import TreeViewLayout from "./TreeViewLayout";
 
 const MainLayout = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '90vh',
-        backgroundColor: '#f0f2f5',
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "90vh",
+        backgroundColor: "#f0f2f5",
         borderRadius: 2,
       }}
     >
       <Paper
         elevation={3}
         sx={{
-          display: 'flex',
-          width: '80%',
-          maxWidth: '1200px',
-          height: '80vh',
+          display: "flex",
+          width: "80%",
+          maxWidth: "1200px",
+          height: "80vh",
           borderRadius: 2,
-          overflow: 'hidden',
+          overflow: "hidden",
         }}
       >
-        <Box sx={{ width: '300px', borderRight: '1px solid #ddd', textAlign: 'left'}}>
+        <Box
+          sx={{
+            width: "300px",
+            borderRight: "1px solid #ddd",
+            textAlign: "left",
+          }}
+        >
           <TreeViewLayout />
         </Box>
 
