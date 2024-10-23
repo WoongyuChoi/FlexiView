@@ -1,8 +1,10 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import { TreeViewBaseItem } from "@mui/x-tree-view/models";
 import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
 import { useState } from "react";
+import { Menu } from "../data/MenuConstant";
 import { convertToTreeItems } from "../utils/MenuUtils";
 
 const TreeViewLayout = () => {
@@ -10,6 +12,11 @@ const TreeViewLayout = () => {
 
   // Menu 데이터를 Tree 구조로 변환
   const menuTreeItems = convertToTreeItems();
+
+  const isItemDisabled = (item: TreeViewBaseItem) => {
+    const menuItem = Menu.find((menu) => menu.mid === item.id);
+    return menuItem?.misUse === "N"; // misUse가 "N"이면 비활성화
+  };
 
   return (
     <Stack sx={{ backgroundColor: "#fad0a1" }}>
@@ -29,6 +36,7 @@ const TreeViewLayout = () => {
         <RichTreeView
           items={menuTreeItems}
           onItemClick={(event, itemId) => setLastClickedItem(itemId)}
+          isItemDisabled={isItemDisabled}
         />
       </Box>
     </Stack>

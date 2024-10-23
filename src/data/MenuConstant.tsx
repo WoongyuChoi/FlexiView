@@ -139,7 +139,7 @@ export const Menu: MenuItem[] = [
     mpath: "/",
     mlevel: "2",
     morder: "4",
-    misUse: "Y",
+    misUse: "N",
   },
   {
     mid: "ASM-D14100",
