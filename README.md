@@ -13,7 +13,7 @@
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/WoongyuChoi/FlexiView.git
-   cd flexiview
+   cd FlexiView
    ```
 
 2. **Install dependencies**:
