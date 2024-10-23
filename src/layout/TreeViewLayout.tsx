@@ -9,9 +9,16 @@ import { convertToTreeItems } from "../utils/MenuUtils";
 
 interface TreeViewLayoutProps {
   apiRef: any;
+  onSelectedItemsChange: (
+    event: React.SyntheticEvent,
+    itemId: string | null
+  ) => void;
 }
 
-const TreeViewLayout = ({ apiRef }: TreeViewLayoutProps) => {
+const TreeViewLayout = ({
+  apiRef,
+  onSelectedItemsChange,
+}: TreeViewLayoutProps) => {
   const [lastClickedItem, setLastClickedItem] = useState<string | null>(null);
 
   // Menu 데이터를 Tree 구조로 변환
@@ -20,17 +27,6 @@ const TreeViewLayout = ({ apiRef }: TreeViewLayoutProps) => {
   const isItemDisabled = (item: TreeViewBaseItem) => {
     const menuItem = Menu.find((menu) => menu.mid === item.id);
     return menuItem?.misUse === "N"; // misUse가 "N"이면 비활성화
-  };
-
-  const handleSelectedItemsChange = (
-    event: React.SyntheticEvent,
-    itemId: string | null
-  ) => {
-    if (itemId != null) {
-      setLastClickedItem(apiRef.current!.getItem(itemId)?.id ?? "Unknown");
-    } else {
-      setLastClickedItem(null);
-    }
   };
 
   return (
@@ -53,7 +49,10 @@ const TreeViewLayout = ({ apiRef }: TreeViewLayoutProps) => {
           apiRef={apiRef}
           // onItemClick={(event, itemId) => setLastClickedItem(itemId)}
           isItemDisabled={isItemDisabled}
-          onSelectedItemsChange={handleSelectedItemsChange}
+          onSelectedItemsChange={(event, itemId) => {
+            setLastClickedItem(itemId);
+            onSelectedItemsChange(event, itemId);
+          }}
         />
       </Box>
     </Stack>

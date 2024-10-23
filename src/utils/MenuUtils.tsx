@@ -32,3 +32,9 @@ export const convertToTreeItems = (): TreeViewBaseItem[] => {
     return menuItem?.mpid === null;
   });
 };
+
+export const getMenuItemByMid = (mid: string | null) => {
+  if (!mid) return null;
+  // mid 값을 받아서 Menu 항목 중 해당 mid에 해당하는 항목을 반환하는 함수
+  return Menu.find((menuItem) => menuItem.mid === mid) || null;
+};
