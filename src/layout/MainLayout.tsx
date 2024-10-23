@@ -1,8 +1,12 @@
 import { Box, Paper } from "@mui/material";
+import { useTreeViewApiRef } from "@mui/x-tree-view/hooks";
 import TextFieldLayout from "./TextFieldLayout";
 import TreeViewLayout from "./TreeViewLayout";
 
 const MainLayout = () => {
+  // TreeView API를 참조할 수 있는 ref 생성
+  const apiRef = useTreeViewApiRef();
+
   return (
     <Box
       sx={{
@@ -32,7 +36,7 @@ const MainLayout = () => {
             textAlign: "left",
           }}
         >
-          <TreeViewLayout />
+          <TreeViewLayout apiRef={apiRef} />
         </Box>
 
         <Box sx={{ flex: 1, padding: 4 }}>
