@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -7,22 +8,56 @@ import {
   SelectChangeEvent,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
-import { useState } from "react";
-import { MenuTitle } from "../data/MenuConstant";
+import { useEffect, useState } from "react";
+import { MenuItem as MenuItemType, MenuTitle } from "../data/MenuConstant";
 import { getMenuItemByMid } from "../utils/MenuUtils";
 
 interface TextFieldLayoutProps {
   selectedItem: string | null;
+  onApplyChanges: (updatedItem: MenuItemType) => void;
 }
 
-const TextFieldLayout = ({ selectedItem }: TextFieldLayoutProps) => {
+const TextFieldLayout = ({
+  selectedItem,
+  onApplyChanges,
+}: TextFieldLayoutProps) => {
   const selectedItemData = getMenuItemByMid(selectedItem);
+  const [mnm, setMnm] = useState<string>(selectedItemData?.mnm || "");
+  const [mpath, setMpath] = useState<string>(selectedItemData?.mpath || "");
+  const [mlevel, setMlevel] = useState<string>(selectedItemData?.mlevel || "");
+  const [morder, setMorder] = useState<string>(selectedItemData?.morder || "");
   const [misUse, setMisUse] = useState<string>(selectedItemData?.misUse || "Y");
+
+  // selectedItem이 변경될 때 상태를 업데이트
+  useEffect(() => {
+    if (selectedItemData) {
+      setMnm(selectedItemData.mnm || "");
+      setMpath(selectedItemData.mpath || "");
+      setMlevel(selectedItemData.mlevel || "");
+      setMorder(selectedItemData.morder || "");
+      setMisUse(selectedItemData.misUse || "Y");
+    }
+  }, [selectedItemData]);
 
   const handleIsUseChange = (event: SelectChangeEvent<string>) => {
     setMisUse(event.target.value);
+  };
+
+  // 적용 버튼 클릭 시 데이터 업데이트
+  const handleApplyClick = () => {
+    if (selectedItemData) {
+      const updatedItem: MenuItemType = {
+        ...selectedItemData, // null이 아닌 경우에만 적용
+        mnm,
+        mpath,
+        mlevel,
+        morder,
+        misUse,
+      };
+      onApplyChanges(updatedItem);
+    }
   };
 
   return (
@@ -48,25 +83,29 @@ const TextFieldLayout = ({ selectedItem }: TextFieldLayoutProps) => {
             />
             <TextField
               label={MenuTitle.mnm}
-              value={selectedItemData?.mnm || ""}
+              value={mnm}
+              onChange={(e) => setMnm(e.target.value)}
               fullWidth
               margin="normal"
             />
             <TextField
               label={MenuTitle.mpath}
-              value={selectedItemData?.mpath || ""}
+              value={mpath}
+              onChange={(e) => setMpath(e.target.value)}
               fullWidth
               margin="normal"
             />
             <TextField
               label={MenuTitle.mlevel}
-              value={selectedItemData?.mlevel || ""}
+              value={mlevel}
+              onChange={(e) => setMlevel(e.target.value)}
               fullWidth
               margin="normal"
             />
             <TextField
               label={MenuTitle.morder}
-              value={selectedItemData?.morder || ""}
+              value={morder}
+              onChange={(e) => setMorder(e.target.value)}
               fullWidth
               margin="normal"
             />
@@ -92,6 +131,14 @@ const TextFieldLayout = ({ selectedItem }: TextFieldLayoutProps) => {
                 <MenuItem value="N">N</MenuItem>
               </Select>
             </FormControl>
+            <Button
+              variant="contained"
+              onClick={handleApplyClick}
+              fullWidth
+              sx={{ marginTop: 2 }}
+            >
+              적용
+            </Button>
           </Box>
         ) : (
           <Typography>No item selected</Typography>

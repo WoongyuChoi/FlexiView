@@ -3,9 +3,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { TreeViewBaseItem } from "@mui/x-tree-view/models";
 import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
-import { useState } from "react";
-import { Menu } from "../data/MenuConstant";
-import { convertToTreeItems } from "../utils/MenuUtils";
+import { useEffect, useState } from "react";
+import { Menu, MenuItem } from "../data/MenuConstant";
+import { convertMenuToTreeItems, convertToTreeItems } from "../utils/MenuUtils";
 
 interface TreeViewLayoutProps {
   apiRef: any;
@@ -13,24 +13,29 @@ interface TreeViewLayoutProps {
     event: React.SyntheticEvent,
     itemId: string | null
   ) => void;
+  menuData: MenuItem[];
 }
 
 const TreeViewLayout = ({
   apiRef,
   onSelectedItemsChange,
+  menuData,
 }: TreeViewLayoutProps) => {
   const [lastClickedItem, setLastClickedItem] = useState<string | null>(null);
+  const [menuTreeItems, setMenuTreeItems] = useState<TreeViewBaseItem[]>([]);
 
-  // Menu 데이터를 Tree 구조로 변환
-  const menuTreeItems = convertToTreeItems();
+  useEffect(() => {
+    const newTreeItems = convertMenuToTreeItems(menuData);
+    setMenuTreeItems(newTreeItems);
+  }, [menuData]);
 
   const isItemDisabled = (item: TreeViewBaseItem) => {
-    const menuItem = Menu.find((menu) => menu.mid === item.id);
+    const menuItem = menuData.find((menu) => menu.mid === item.id);
     return menuItem?.misUse === "N"; // misUse가 "N"이면 비활성화
   };
 
   return (
-    <Stack sx={{ backgroundColor: "#fad0a1" }}>
+    <Stack sx={{ backgroundColor: "#fad0a1", maxHeight: "100px" }}>
       <Typography sx={{ textAlign: "center", padding: 2 }}>
         {lastClickedItem == null
           ? "No item click recorded"
@@ -38,10 +43,11 @@ const TreeViewLayout = ({
       </Typography>
       <Box
         sx={{
-          minHeight: "100vh",
+          minHeight: "80vh",
           minWidth: 250,
           backgroundColor: "#f5f5f5",
           padding: 2,
+          overflowY: "auto",
         }}
       >
         <RichTreeView

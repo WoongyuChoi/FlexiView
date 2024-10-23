@@ -9,7 +9,7 @@ export enum MenuTitle {
   misUse = "사용여부",
 }
 
-interface MenuItem {
+export interface MenuItem {
   mid: string | null;
   mpid: string | null;
   mnm: string | null;
@@ -108,7 +108,7 @@ export const Menu: MenuItem[] = [
     mtp: "M",
     mpath: "/",
     mlevel: "3",
-    morder: "1",
+    morder: "2",
     misUse: "Y",
   },
   {
@@ -118,7 +118,7 @@ export const Menu: MenuItem[] = [
     mtp: "M",
     mpath: "/",
     mlevel: "3",
-    morder: "2",
+    morder: "3",
     misUse: "Y",
   },
   {
@@ -128,7 +128,7 @@ export const Menu: MenuItem[] = [
     mtp: "M",
     mpath: "/",
     mlevel: "3",
-    morder: "3",
+    morder: "4",
     misUse: "Y",
   },
   {
