@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Switch from "@mui/material/Switch";
 import { TreeViewBaseItem } from "@mui/x-tree-view/models";
 import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Menu, MenuItem } from "../data/MenuConstant";
 import { convertMenuToTreeItems, convertToTreeItems } from "../utils/MenuUtils";
 
@@ -25,7 +25,9 @@ const TreeViewLayout = ({
   const [lastClickedItem, setLastClickedItem] = useState<string[] | null>([]);
   const [menuTreeItems, setMenuTreeItems] = useState<TreeViewBaseItem[]>([]);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
+  const toggledItemRef = useRef<{ [itemId: string]: boolean }>({});
 
   useEffect(() => {
     const newTreeItems = convertMenuToTreeItems(menuData);
@@ -39,6 +41,55 @@ const TreeViewLayout = ({
   const isItemDisabled = (item: TreeViewBaseItem) => {
     const menuItem = menuData.find((menu) => menu.mid === item.id);
     return menuItem?.misUse === "N"; // misUse가 "N"이면 비활성화
+  };
+
+  const getItemDescendantsIds = (item: TreeViewBaseItem): string[] => {
+    const ids: string[] = [];
+    item.children?.forEach((child) => {
+      ids.push(child.id);
+      ids.push(...getItemDescendantsIds(child));
+    });
+    return ids;
+  };
+
+  const handleSelectedItemsChange = (
+    event: React.SyntheticEvent,
+    newSelectedItems: string[]
+  ) => {
+    setSelectedItems(newSelectedItems);
+
+    // 부모 항목 선택 시 자식 항목 선택/해제
+    const itemsToSelect: string[] = [];
+    const itemsToUnSelect: { [itemId: string]: boolean } = {};
+    Object.entries(toggledItemRef.current).forEach(([itemId, isSelected]) => {
+      const item = apiRef.current!.getItem(itemId);
+      if (isSelected) {
+        itemsToSelect.push(...getItemDescendantsIds(item));
+      } else {
+        getItemDescendantsIds(item).forEach((descendantId) => {
+          itemsToUnSelect[descendantId] = true;
+        });
+      }
+    });
+
+    const newSelectedItemsWithChildren = Array.from(
+      new Set(
+        [...newSelectedItems, ...itemsToSelect].filter(
+          (itemId) => !itemsToUnSelect[itemId]
+        )
+      )
+    );
+
+    setSelectedItems(newSelectedItemsWithChildren);
+    toggledItemRef.current = {};
+
+    const lastItemId = Array.isArray(newSelectedItemsWithChildren)
+      ? newSelectedItemsWithChildren[0]
+      : newSelectedItemsWithChildren; // 최근 항목 선택
+    setLastClickedItem(newSelectedItemsWithChildren);
+
+    // 상위 컴포넌트에 마지막 선택된 항목 전달
+    onSelectedItemsChange(event, lastItemId);
   };
 
   const handleExpandClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -104,10 +155,10 @@ const TreeViewLayout = ({
           checkboxSelection // 체크박스 선택 활성화
           // onItemClick={(event, itemId) => setLastClickedItem(itemId)}
           isItemDisabled={isItemDisabled}
-          onSelectedItemsChange={(event, itemIds) => {
-            const lastItemId = Array.isArray(itemIds) ? itemIds[0] : itemIds; // 최근 항목 선택
-            setLastClickedItem(itemIds);
-            onSelectedItemsChange(event, lastItemId);
+          selectedItems={selectedItems}
+          onSelectedItemsChange={handleSelectedItemsChange}
+          onItemSelectionToggle={(event, itemId, isSelected) => {
+            toggledItemRef.current[itemId] = isSelected;
           }}
         />
       </Box>
