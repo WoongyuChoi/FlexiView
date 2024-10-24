@@ -22,7 +22,7 @@ const TreeViewLayout = ({
   onSelectedItemsChange,
   menuData,
 }: TreeViewLayoutProps) => {
-  const [lastClickedItem, setLastClickedItem] = useState<string | null>(null);
+  const [lastClickedItem, setLastClickedItem] = useState<string[] | null>([]);
   const [menuTreeItems, setMenuTreeItems] = useState<TreeViewBaseItem[]>([]);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
@@ -44,7 +44,7 @@ const TreeViewLayout = ({
   const handleExpandClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newState = event.target.checked;
     setIsExpanded(newState);
-    
+
     if (newState) {
       const allItemIds = menuData.map((item) => item.mid || "");
       setExpandedItems(allItemIds);
@@ -54,12 +54,24 @@ const TreeViewLayout = ({
   };
 
   return (
-    <Stack sx={{ backgroundColor: "#fad0a1", maxHeight: "100px" }}>
-      <Typography sx={{ textAlign: "center", padding: 2 }}>
-        {lastClickedItem == null
-          ? "No item click recorded"
-          : `Last clicked item: ${lastClickedItem}`}
-      </Typography>
+    <Stack sx={{ backgroundColor: "#fad0a1", maxHeight: "140px" }}>
+      <Box
+        sx={{
+          textAlign: "center",
+          overflowX: "auto", // 가로 스크롤 추가
+          overflowY: "hidden",
+          whiteSpace: "nowrap", // 텍스트가 한 줄로 표시되도록 설정
+          display: "block", // 박스의 높이를 유지
+          padding: 2,
+          minHeight: "10vh",
+        }}
+      >
+        <Typography>
+          {lastClickedItem == null || lastClickedItem.length == 0
+            ? "No item click recorded"
+            : `Last clicked item: ${lastClickedItem}`}
+        </Typography>
+      </Box>
 
       <Box sx={{ textAlign: "center" }}>
         <Typography component="div">
@@ -88,11 +100,14 @@ const TreeViewLayout = ({
           onExpandedItemsChange={(event, itemIds) => {
             setExpandedItems(itemIds);
           }}
+          multiSelect // 다중 선택 활성화
+          checkboxSelection // 체크박스 선택 활성화
           // onItemClick={(event, itemId) => setLastClickedItem(itemId)}
           isItemDisabled={isItemDisabled}
-          onSelectedItemsChange={(event, itemId) => {
-            setLastClickedItem(itemId);
-            onSelectedItemsChange(event, itemId);
+          onSelectedItemsChange={(event, itemIds) => {
+            const lastItemId = Array.isArray(itemIds) ? itemIds[0] : itemIds; // 최근 항목 선택
+            setLastClickedItem(itemIds);
+            onSelectedItemsChange(event, lastItemId);
           }}
         />
       </Box>
