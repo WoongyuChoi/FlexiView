@@ -43,21 +43,22 @@ const TreeViewLayout = ({
     return menuItem?.misUse === "N"; // misUse가 "N"이면 비활성화
   };
 
-  const getItemDescendantsIds = (item: TreeViewBaseItem): string[] => {
-    const ids: string[] = [];
-    item.children?.forEach((child) => {
-      ids.push(child.id);
-      ids.push(...getItemDescendantsIds(child));
-    });
-    return ids;
+  const handleItemClick = (event: React.SyntheticEvent, itemId: string) => {
+    console.log(itemId);
+    if (!selectedItems.includes(itemId)) {
+      handleSelectedItemsChange(event, [...selectedItems, itemId]);
+    } else {
+      handleSelectedItemsChange(
+        event,
+        selectedItems.filter((id) => id !== itemId)
+      );
+    }
   };
 
   const handleSelectedItemsChange = (
     event: React.SyntheticEvent,
     newSelectedItems: string[]
   ) => {
-    setSelectedItems(newSelectedItems);
-
     // 부모 항목 선택 시 자식 항목 선택/해제
     const itemsToSelect: string[] = [];
     const itemsToUnSelect: { [itemId: string]: boolean } = {};
@@ -84,12 +85,21 @@ const TreeViewLayout = ({
     toggledItemRef.current = {};
 
     const lastItemId = Array.isArray(newSelectedItemsWithChildren)
-      ? newSelectedItemsWithChildren[0]
-      : newSelectedItemsWithChildren; // 최근 항목 선택
+      ? newSelectedItemsWithChildren[newSelectedItemsWithChildren.length - 1]
+      : newSelectedItemsWithChildren;
     setLastClickedItem(newSelectedItemsWithChildren);
 
     // 상위 컴포넌트에 마지막 선택된 항목 전달
     onSelectedItemsChange(event, lastItemId);
+  };
+
+  const getItemDescendantsIds = (item: TreeViewBaseItem): string[] => {
+    const ids: string[] = [];
+    item.children?.forEach((child) => {
+      ids.push(child.id);
+      ids.push(...getItemDescendantsIds(child));
+    });
+    return ids;
   };
 
   const handleExpandClick = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,7 +163,7 @@ const TreeViewLayout = ({
           }}
           multiSelect // 다중 선택 활성화
           checkboxSelection // 체크박스 선택 활성화
-          // onItemClick={(event, itemId) => setLastClickedItem(itemId)}
+          onItemClick={handleItemClick} // 라벨 클릭 시에도 선택 가능하도록 처리
           isItemDisabled={isItemDisabled}
           selectedItems={selectedItems}
           onSelectedItemsChange={handleSelectedItemsChange}
