@@ -23,10 +23,15 @@ const TreeViewLayout = ({
 }: TreeViewLayoutProps) => {
   const [lastClickedItem, setLastClickedItem] = useState<string | null>(null);
   const [menuTreeItems, setMenuTreeItems] = useState<TreeViewBaseItem[]>([]);
+  const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   useEffect(() => {
     const newTreeItems = convertMenuToTreeItems(menuData);
     setMenuTreeItems(newTreeItems);
+
+    // 모든 항목을 확장 상태로 설정
+    const allItemIds = menuData.map((item) => item.mid || "");
+    setExpandedItems(allItemIds);
   }, [menuData]);
 
   const isItemDisabled = (item: TreeViewBaseItem) => {
@@ -53,6 +58,10 @@ const TreeViewLayout = ({
         <RichTreeView
           items={menuTreeItems}
           apiRef={apiRef}
+          expandedItems={expandedItems}
+          onExpandedItemsChange={(event, itemIds) => {
+            setExpandedItems(itemIds);
+          }}
           // onItemClick={(event, itemId) => setLastClickedItem(itemId)}
           isItemDisabled={isItemDisabled}
           onSelectedItemsChange={(event, itemId) => {
