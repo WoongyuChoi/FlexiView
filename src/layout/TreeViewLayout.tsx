@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Switch from "@mui/material/Switch";
 import { TreeViewBaseItem } from "@mui/x-tree-view/models";
 import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
 import { useEffect, useState } from "react";
@@ -24,6 +25,7 @@ const TreeViewLayout = ({
   const [lastClickedItem, setLastClickedItem] = useState<string | null>(null);
   const [menuTreeItems, setMenuTreeItems] = useState<TreeViewBaseItem[]>([]);
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const [isExpanded, setIsExpanded] = useState<boolean>(true);
 
   useEffect(() => {
     const newTreeItems = convertMenuToTreeItems(menuData);
@@ -39,6 +41,18 @@ const TreeViewLayout = ({
     return menuItem?.misUse === "N"; // misUse가 "N"이면 비활성화
   };
 
+  const handleExpandClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newState = event.target.checked;
+    setIsExpanded(newState);
+    
+    if (newState) {
+      const allItemIds = menuData.map((item) => item.mid || "");
+      setExpandedItems(allItemIds);
+    } else {
+      setExpandedItems([]);
+    }
+  };
+
   return (
     <Stack sx={{ backgroundColor: "#fad0a1", maxHeight: "100px" }}>
       <Typography sx={{ textAlign: "center", padding: 2 }}>
@@ -46,6 +60,18 @@ const TreeViewLayout = ({
           ? "No item click recorded"
           : `Last clicked item: ${lastClickedItem}`}
       </Typography>
+
+      <Box sx={{ textAlign: "center" }}>
+        <Typography component="div">
+          <Switch
+            checked={isExpanded}
+            onChange={handleExpandClick}
+            inputProps={{ "aria-label": "controlled" }}
+          />
+          {isExpanded ? "Expand all" : "Collapse all"}
+        </Typography>
+      </Box>
+
       <Box
         sx={{
           minHeight: "80vh",
