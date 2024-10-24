@@ -44,7 +44,6 @@ const TreeViewLayout = ({
   };
 
   const handleItemClick = (event: React.SyntheticEvent, itemId: string) => {
-    console.log(itemId);
     if (!selectedItems.includes(itemId)) {
       handleSelectedItemsChange(event, [...selectedItems, itemId]);
     } else {
@@ -147,7 +146,7 @@ const TreeViewLayout = ({
 
       <Box
         sx={{
-          minHeight: "80vh",
+          minHeight: "70vh",
           minWidth: 250,
           backgroundColor: "#f5f5f5",
           padding: 2,

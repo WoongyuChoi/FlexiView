@@ -24,7 +24,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D10000",
     mpid: null,
-    mnm: "가정관리",
+    mnm: "Home Office",
     mtp: "D",
     mpath: "/",
     mlevel: "1",
@@ -34,7 +34,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D11000",
     mpid: "ASM-D10000",
-    mnm: "기초데이터관리",
+    mnm: "Basic Info",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -44,7 +44,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M11100",
     mpid: "ASM-D11000",
-    mnm: "가정관리MASTER",
+    mnm: "Master Data",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -54,7 +54,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M11200",
     mpid: "ASM-D11000",
-    mnm: "기초데이터모니터링",
+    mnm: "Data Sync",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -64,7 +64,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D12000",
     mpid: "ASM-D10000",
-    mnm: "기준정보관리",
+    mnm: "Control Base",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -74,7 +74,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D12100",
     mpid: "ASM-D12000",
-    mnm: "기준정보업로드",
+    mnm: "File Upload",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -84,7 +84,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D13000",
     mpid: "ASM-D10000",
-    mnm: "가정산출관리",
+    mnm: "Info Grid",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -94,7 +94,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M13400",
     mpid: "ASM-D13000",
-    mnm: "기타가정업로드",
+    mnm: "Temp Sync",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -104,7 +104,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M13500",
     mpid: "ASM-D13000",
-    mnm: "최종가정업로드",
+    mnm: "Final Sync",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -114,7 +114,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M13600",
     mpid: "ASM-D13000",
-    mnm: "Keyset조회및설정",
+    mnm: "Key Map",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -124,7 +124,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M13700",
     mpid: "ASM-D13000",
-    mnm: "최종KEYSET관리",
+    mnm: "Final Key",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -134,7 +134,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D14000",
     mpid: "ASM-D10000",
-    mnm: "가정검증관리",
+    mnm: "Data Check",
     mtp: "M",
     mpath: "/",
     mlevel: "2",
@@ -144,7 +144,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D14100",
     mpid: "ASM-D14000",
-    mnm: "검증파라미터설정",
+    mnm: "Param Sync",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -154,7 +154,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M14200",
     mpid: "ASM-D14100",
-    mnm: "가정검증결과조회",
+    mnm: "Check View",
     mtp: "M",
     mpath: "/",
     mlevel: "4",
@@ -162,11 +162,41 @@ export const Menu: MenuItem[] = [
     misUse: "Y",
   },
   {
+    mid: "CLS-D10000",
+    mpid: null,
+    mnm: "Debt Record",
+    mtp: "D",
+    mpath: "/",
+    mlevel: "1",
+    morder: "3",
+    misUse: "Y",
+  },
+  {
+    mid: "CLS-D11000",
+    mpid: "CLS-D10000",
+    mnm: "Info Track",
+    mtp: "D",
+    mpath: "/",
+    mlevel: "2",
+    morder: "1",
+    misUse: "Y",
+  },
+  {
+    mid: "CLS-M11000",
+    mpid: "CLS-D11000",
+    mnm: "Code Link",
+    mtp: "M",
+    mpath: "/",
+    mlevel: "3",
+    morder: "1",
+    misUse: "Y",
+  },
+  {
     mid: "CMN-D10000",
     mpid: null,
-    mpath: "/",
-    mnm: "시스템관리",
+    mnm: "Sys Config",
     mtp: "D",
+    mpath: "/",
     mlevel: "1",
     morder: "6",
     misUse: "Y",
@@ -174,7 +204,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-D11000",
     mpid: "CMN-D10000",
-    mnm: "메뉴관리",
+    mnm: "Menu Setup",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -184,7 +214,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-M11100",
     mpid: "CMN-D11000",
-    mnm: "메뉴관리",
+    mnm: "Menu Master",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -194,7 +224,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-D13000",
     mpid: "CMN-D10000",
-    mnm: "코드관리",
+    mnm: "Code Setup",
     mtp: "M",
     mpath: "/",
     mlevel: "2",
@@ -204,7 +234,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-M13100",
     mpid: "CMN-D13000",
-    mnm: "공통코드관리",
+    mnm: "Common Codes",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -214,7 +244,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-D15000",
     mpid: "CMN-D10000",
-    mnm: "공지사항관리",
+    mnm: "News Posts",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -224,7 +254,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-M15100",
     mpid: "CMN-D15000",
-    mnm: "공지사항관리",
+    mnm: "Post Master",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -234,7 +264,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-M15200",
     mpid: "CMN-D15000",
-    mnm: "공지사항조회",
+    mnm: "Post View",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
