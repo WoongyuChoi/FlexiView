@@ -1,10 +1,28 @@
+import ArticleIcon from "@mui/icons-material/Article";
+import FolderRounded from "@mui/icons-material/FolderRounded";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import { alpha, styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
+import Typography from "@mui/material/Typography";
 import { TreeViewBaseItem } from "@mui/x-tree-view/models";
 import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
-import { useEffect, useState, useRef } from "react";
+import {
+  TreeItem2Content,
+  TreeItem2IconContainer,
+  TreeItem2GroupTransition,
+  TreeItem2Label,
+  TreeItem2Root,
+  TreeItem2Checkbox,
+} from "@mui/x-tree-view/TreeItem2";
+import { TreeItem2Icon } from "@mui/x-tree-view/TreeItem2Icon";
+import { TreeItem2Provider } from "@mui/x-tree-view/TreeItem2Provider";
+import {
+  useTreeItem2,
+  UseTreeItem2Parameters,
+} from "@mui/x-tree-view/useTreeItem2";
+import clsx from "clsx";
+import React, { useEffect, useRef, useState } from "react";
 import { Menu, MenuItem } from "../data/MenuConstant";
 import { convertMenuToTreeItems, convertToTreeItems } from "../utils/MenuUtils";
 
@@ -16,6 +34,121 @@ interface TreeViewLayoutProps {
   ) => void;
   menuData: MenuItem[];
 }
+
+interface CustomTreeItemProps
+  extends Omit<UseTreeItem2Parameters, "rootRef">,
+    Omit<React.HTMLAttributes<HTMLLIElement>, "onFocus"> {}
+
+const CustomTreeItemContent = styled(TreeItem2Content)(({ theme }) => ({
+  flexDirection: "row-reverse",
+  [`&.Mui-expanded `]: {
+    "&:not(.Mui-focused, .Mui-selected, .Mui-selected.Mui-focused) .labelIcon":
+      {
+        color: theme.palette.primary.dark,
+        ...theme.applyStyles("light", {
+          color: theme.palette.primary.main,
+        }),
+      },
+  },
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.primary.main, 0.1),
+    color: "white",
+    ...theme.applyStyles("light", {
+      color: theme.palette.primary.main,
+    }),
+  },
+  [`&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused`]: {
+    // backgroundColor: theme.palette.primary.dark,
+    // color: theme.palette.primary.contrastText,
+    // ...theme.applyStyles('light', {
+    //   backgroundColor: theme.palette.primary.main,
+    // }),
+  },
+}));
+
+interface CustomLabelProps {
+  children: React.ReactNode;
+  icon?: React.ElementType;
+  expandable?: boolean;
+}
+
+const StyledTreeItemLabelText = styled(Typography)({
+  color: "inherit",
+  fontWeight: 500,
+}) as typeof Typography;
+
+function CustomLabel({
+  icon: Icon,
+  expandable,
+  children,
+  ...other
+}: CustomLabelProps) {
+  return (
+    <TreeItem2Label
+      {...other}
+      sx={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      {Icon && (
+        <Box
+          component={Icon}
+          className="labelIcon"
+          color="inherit"
+          sx={{ mr: 1, fontSize: "1.2rem" }}
+        />
+      )}
+
+      <StyledTreeItemLabelText variant="body2">
+        {children}
+      </StyledTreeItemLabelText>
+    </TreeItem2Label>
+  );
+}
+
+const CustomTreeItem = React.forwardRef(function CustomTreeItem(
+  props: CustomTreeItemProps,
+  ref: React.Ref<HTMLLIElement>
+) {
+  const { id, itemId, label, disabled, children, ...other } = props;
+  const icon = Boolean(children) ? FolderRounded : ArticleIcon;
+  const {
+    getRootProps,
+    getContentProps,
+    getIconContainerProps,
+    getCheckboxProps,
+    getLabelProps,
+    getGroupTransitionProps,
+    getDragAndDropOverlayProps,
+    status,
+  } = useTreeItem2({ id, itemId, children, label, disabled, rootRef: ref });
+
+  return (
+    <TreeItem2Provider itemId={itemId}>
+      <TreeItem2Root {...getRootProps(other)}>
+        <CustomTreeItemContent
+          {...getContentProps({
+            className: clsx("content", {
+              "Mui-expanded": status.expanded,
+              "Mui-selected": status.selected,
+              "Mui-focused": status.focused,
+            }),
+          })}
+        >
+          <TreeItem2IconContainer {...getIconContainerProps()}>
+            <TreeItem2Icon status={status} />
+          </TreeItem2IconContainer>
+          <CustomLabel {...getLabelProps({ icon })} />
+          <TreeItem2Checkbox {...getCheckboxProps()} />
+        </CustomTreeItemContent>
+        {children && (
+          <TreeItem2GroupTransition {...getGroupTransitionProps()} />
+        )}
+      </TreeItem2Root>
+    </TreeItem2Provider>
+  );
+});
 
 const TreeViewLayout = ({
   apiRef,
@@ -178,6 +311,7 @@ const TreeViewLayout = ({
             onItemSelectionToggle={(event, itemId, isSelected) => {
               toggledItemRef.current[itemId] = isSelected;
             }}
+            slots={{ item: CustomTreeItem }}
           />
         </Box>
       </Stack>
