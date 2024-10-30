@@ -150,6 +150,15 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(
   );
 });
 
+const getItemDescendantsIds = (item: TreeViewBaseItem): string[] => {
+  const ids: string[] = [];
+  item.children?.forEach((child) => {
+    ids.push(child.id);
+    ids.push(...getItemDescendantsIds(child));
+  });
+  return ids;
+};
+
 const TreeViewLayout = ({
   apiRef,
   onSelectedItemsChange,
@@ -225,15 +234,6 @@ const TreeViewLayout = ({
 
     // 상위 컴포넌트에 마지막 선택된 항목 전달
     onSelectedItemsChange(event, lastItemId);
-  };
-
-  const getItemDescendantsIds = (item: TreeViewBaseItem): string[] => {
-    const ids: string[] = [];
-    item.children?.forEach((child) => {
-      ids.push(child.id);
-      ids.push(...getItemDescendantsIds(child));
-    });
-    return ids;
   };
 
   const handleExpandClick = (event: React.ChangeEvent<HTMLInputElement>) => {
