@@ -24,7 +24,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D10000",
     mpid: null,
-    mnm: "Home Office",
+    mnm: "Country",
     mtp: "D",
     mpath: "/",
     mlevel: "1",
@@ -34,7 +34,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D11000",
     mpid: "ASM-D10000",
-    mnm: "Basic Info",
+    mnm: "Republic of Korea",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -44,7 +44,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M11100",
     mpid: "ASM-D11000",
-    mnm: "Master Data",
+    mnm: "Seoul",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -54,7 +54,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M11200",
     mpid: "ASM-D11000",
-    mnm: "Data Sync",
+    mnm: "Incheon",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -64,7 +64,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D12000",
     mpid: "ASM-D10000",
-    mnm: "Control Base",
+    mnm: "United States of America",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -74,7 +74,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D12100",
     mpid: "ASM-D12000",
-    mnm: "File Upload",
+    mnm: "Washington",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -84,7 +84,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D13000",
     mpid: "ASM-D10000",
-    mnm: "Info Grid",
+    mnm: "Japan",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -94,7 +94,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M13400",
     mpid: "ASM-D13000",
-    mnm: "Temp Sync",
+    mnm: "Tokyo",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -104,7 +104,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M13500",
     mpid: "ASM-D13000",
-    mnm: "Final Sync",
+    mnm: "Osaka",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -114,7 +114,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M13600",
     mpid: "ASM-D13000",
-    mnm: "Key Map",
+    mnm: "Kyoto",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -124,7 +124,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M13700",
     mpid: "ASM-D13000",
-    mnm: "Final Key",
+    mnm: "Hokkaido",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -134,8 +134,8 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D14000",
     mpid: "ASM-D10000",
-    mnm: "Data Check",
-    mtp: "M",
+    mnm: "France",
+    mtp: "D",
     mpath: "/",
     mlevel: "2",
     morder: "4",
@@ -144,7 +144,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-D14100",
     mpid: "ASM-D14000",
-    mnm: "Param Sync",
+    mnm: "Paris",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -154,7 +154,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "ASM-M14200",
     mpid: "ASM-D14100",
-    mnm: "Check View",
+    mnm: "Arrondissement",
     mtp: "M",
     mpath: "/",
     mlevel: "4",
@@ -164,7 +164,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CLS-D10000",
     mpid: null,
-    mnm: "Debt Record",
+    mnm: "Fruit",
     mtp: "D",
     mpath: "/",
     mlevel: "1",
@@ -174,7 +174,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CLS-D11000",
     mpid: "CLS-D10000",
-    mnm: "Info Track",
+    mnm: "Apple",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -184,7 +184,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CLS-M11000",
     mpid: "CLS-D11000",
-    mnm: "Code Link",
+    mnm: "Granny Smith",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -194,7 +194,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-D10000",
     mpid: null,
-    mnm: "Sys Config",
+    mnm: "Animal",
     mtp: "D",
     mpath: "/",
     mlevel: "1",
@@ -204,7 +204,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-D11000",
     mpid: "CMN-D10000",
-    mnm: "Menu Setup",
+    mnm: "Mammal",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -214,7 +214,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-M11100",
     mpid: "CMN-D11000",
-    mnm: "Menu Master",
+    mnm: "Elephant",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -224,8 +224,8 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-D13000",
     mpid: "CMN-D10000",
-    mnm: "Code Setup",
-    mtp: "M",
+    mnm: "Bird",
+    mtp: "D",
     mpath: "/",
     mlevel: "2",
     morder: "3",
@@ -234,7 +234,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-M13100",
     mpid: "CMN-D13000",
-    mnm: "Common Codes",
+    mnm: "Eagle",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -244,7 +244,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-D15000",
     mpid: "CMN-D10000",
-    mnm: "News Posts",
+    mnm: "Reptile",
     mtp: "D",
     mpath: "/",
     mlevel: "2",
@@ -254,7 +254,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-M15100",
     mpid: "CMN-D15000",
-    mnm: "Post Master",
+    mnm: "Snake",
     mtp: "M",
     mpath: "/",
     mlevel: "3",
@@ -264,7 +264,7 @@ export const Menu: MenuItem[] = [
   {
     mid: "CMN-M15200",
     mpid: "CMN-D15000",
-    mnm: "Post View",
+    mnm: "Lizard",
     mtp: "M",
     mpath: "/",
     mlevel: "3",

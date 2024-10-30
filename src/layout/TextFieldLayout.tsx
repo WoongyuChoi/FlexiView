@@ -61,90 +61,98 @@ const TextFieldLayout = ({
   };
 
   return (
-    <Stack>
-      <Box
-        sx={{
-          minHeight: "100%",
-          minWidth: 250,
-          padding: 2,
-          backgroundColor: "#ffffff",
-          borderRadius: 2,
-          boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        {selectedItem ? (
-          <Box>
-            <TextField
-              label={MenuTitle.mid}
-              value={selectedItemData?.mid || ""}
-              fullWidth
-              margin="normal"
-              disabled
-            />
-            <TextField
-              label={MenuTitle.mnm}
-              value={mnm}
-              onChange={(e) => setMnm(e.target.value)}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label={MenuTitle.mpath}
-              value={mpath}
-              onChange={(e) => setMpath(e.target.value)}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label={MenuTitle.mlevel}
-              value={mlevel}
-              onChange={(e) => setMlevel(e.target.value)}
-              fullWidth
-              margin="normal"
-            />
-            <TextField
-              label={MenuTitle.morder}
-              value={morder}
-              onChange={(e) => setMorder(e.target.value)}
-              fullWidth
-              margin="normal"
-            />
-            <FormControl fullWidth margin="normal">
-              <InputLabel>{MenuTitle.misUse}</InputLabel>
-              <Select
-                value={misUse}
-                onChange={handleIsUseChange}
+    <Box
+      sx={{
+        flex: 1,
+        padding: "12px",
+        marginTop: "12px",
+        overflowY: "auto",
+      }}
+    >
+      <Stack>
+        <Box
+          sx={{
+            minWidth: "400px",
+            padding: 2,
+            backgroundColor: "#ffffff",
+            borderRadius: 2,
+            boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          {selectedItem ? (
+            <Box>
+              <TextField
+                label={MenuTitle.mid}
+                value={selectedItemData?.mid || ""}
                 fullWidth
-                label={MenuTitle.misUse}
-                sx={{
-                  textAlign: "left",
-                }}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      textAlign: "left",
+                margin="normal"
+                disabled
+              />
+              <TextField
+                label={MenuTitle.mnm}
+                value={mnm}
+                onChange={(e) => setMnm(e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                label={MenuTitle.mpath}
+                value={mpath}
+                onChange={(e) => setMpath(e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                label={MenuTitle.mlevel}
+                value={mlevel}
+                onChange={(e) => setMlevel(e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+              <TextField
+                label={MenuTitle.morder}
+                value={morder}
+                onChange={(e) => setMorder(e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+              <FormControl fullWidth margin="normal">
+                <InputLabel>{MenuTitle.misUse}</InputLabel>
+                <Select
+                  value={misUse}
+                  onChange={handleIsUseChange}
+                  fullWidth
+                  label={MenuTitle.misUse}
+                  sx={{
+                    textAlign: "left",
+                  }}
+                  MenuProps={{
+                    PaperProps: {
+                      sx: {
+                        textAlign: "left",
+                      },
                     },
-                  },
-                }}
+                  }}
+                >
+                  <MenuItem value="Y">Y</MenuItem>
+                  <MenuItem value="N">N</MenuItem>
+                </Select>
+              </FormControl>
+              <Button
+                variant="contained"
+                onClick={handleApplyClick}
+                fullWidth
+                sx={{ marginTop: 2 }}
               >
-                <MenuItem value="Y">Y</MenuItem>
-                <MenuItem value="N">N</MenuItem>
-              </Select>
-            </FormControl>
-            <Button
-              variant="contained"
-              onClick={handleApplyClick}
-              fullWidth
-              sx={{ marginTop: 2 }}
-            >
-              적용
-            </Button>
-          </Box>
-        ) : (
-          <Typography>No item selected</Typography>
-        )}
-      </Box>
-    </Stack>
+                적용
+              </Button>
+            </Box>
+          ) : (
+            <Typography>No item selected</Typography>
+          )}
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 

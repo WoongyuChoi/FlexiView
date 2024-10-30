@@ -29,12 +29,13 @@ const MainLayout = () => {
   return (
     <Box
       sx={{
+        width: "1000px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         height: "90vh",
         backgroundColor: "#f0f2f5",
-        borderRadius: 2,
+        borderRadius: 4,
       }}
     >
       <Paper
@@ -42,32 +43,21 @@ const MainLayout = () => {
         sx={{
           display: "flex",
           width: "90%",
-          maxWidth: "1200px",
-          height: "85vh",
+          height: "95%",
           borderRadius: 2,
           overflow: "hidden",
         }}
       >
-        <Box
-          sx={{
-            width: "300px",
-            borderRight: "1px solid #ddd",
-            textAlign: "left",
-          }}
-        >
-          <TreeViewLayout
-            apiRef={apiRef}
-            onSelectedItemsChange={handleSelectedItemsChange}
-            menuData={menuData}
-          />
-        </Box>
+        <TreeViewLayout
+          apiRef={apiRef}
+          onSelectedItemsChange={handleSelectedItemsChange}
+          menuData={menuData}
+        />
 
-        <Box sx={{ flex: 1, padding: 4, width: "600px" }}>
-          <TextFieldLayout
-            selectedItem={selectedItem}
-            onApplyChanges={handleApplyChanges}
-          />
-        </Box>
+        <TextFieldLayout
+          selectedItem={selectedItem}
+          onApplyChanges={handleApplyChanges}
+        />
       </Paper>
     </Box>
   );
