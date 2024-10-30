@@ -114,64 +114,72 @@ const TreeViewLayout = ({
   };
 
   return (
-    <Stack sx={{ backgroundColor: "#fad0a1", maxHeight: "140px" }}>
-      <Box
-        sx={{
-          textAlign: "center",
-          overflowX: "auto", // 가로 스크롤 추가
-          overflowY: "hidden",
-          whiteSpace: "nowrap", // 텍스트가 한 줄로 표시되도록 설정
-          display: "block", // 박스의 높이를 유지
-          padding: 2,
-          minHeight: "10vh",
-        }}
-      >
-        <Typography>
-          {lastClickedItem == null || lastClickedItem.length == 0
-            ? "No item click recorded"
-            : `Last clicked item: ${lastClickedItem}`}
-        </Typography>
-      </Box>
+    <Box
+      sx={{
+        width: "350px",
+        borderRight: "1px solid #ddd",
+        textAlign: "left",
+      }}
+    >
+      <Stack sx={{ backgroundColor: "#fad0a1", maxHeight: "140px" }}>
+        <Box
+          sx={{
+            textAlign: "center",
+            overflowX: "auto", // 가로 스크롤 추가
+            overflowY: "hidden",
+            whiteSpace: "nowrap", // 텍스트가 한 줄로 표시되도록 설정
+            display: "block", // 박스의 높이를 유지
+            padding: 2,
+            minHeight: "10vh",
+          }}
+        >
+          <Typography>
+            {lastClickedItem == null || lastClickedItem.length == 0
+              ? "No item click recorded"
+              : `Last clicked item: ${lastClickedItem}`}
+          </Typography>
+        </Box>
 
-      <Box sx={{ textAlign: "center" }}>
-        <Typography component="div">
-          <Switch
-            checked={isExpanded}
-            onChange={handleExpandClick}
-            inputProps={{ "aria-label": "controlled" }}
+        <Box sx={{ textAlign: "center" }}>
+          <Typography component="div">
+            <Switch
+              checked={isExpanded}
+              onChange={handleExpandClick}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            {isExpanded ? "Expand all" : "Collapse all"}
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            minHeight: "70vh",
+            minWidth: 250,
+            backgroundColor: "#f5f5f5",
+            padding: 2,
+            overflowY: "auto",
+          }}
+        >
+          <RichTreeView
+            items={menuTreeItems}
+            apiRef={apiRef}
+            expandedItems={expandedItems}
+            onExpandedItemsChange={(event, itemIds) => {
+              setExpandedItems(itemIds);
+            }}
+            multiSelect // 다중 선택 활성화
+            checkboxSelection // 체크박스 선택 활성화
+            onItemClick={handleItemClick} // 라벨 클릭 시에도 선택 가능하도록 처리
+            isItemDisabled={isItemDisabled}
+            selectedItems={selectedItems}
+            onSelectedItemsChange={handleSelectedItemsChange}
+            onItemSelectionToggle={(event, itemId, isSelected) => {
+              toggledItemRef.current[itemId] = isSelected;
+            }}
           />
-          {isExpanded ? "Expand all" : "Collapse all"}
-        </Typography>
-      </Box>
-
-      <Box
-        sx={{
-          minHeight: "70vh",
-          minWidth: 250,
-          backgroundColor: "#f5f5f5",
-          padding: 2,
-          overflowY: "auto",
-        }}
-      >
-        <RichTreeView
-          items={menuTreeItems}
-          apiRef={apiRef}
-          expandedItems={expandedItems}
-          onExpandedItemsChange={(event, itemIds) => {
-            setExpandedItems(itemIds);
-          }}
-          multiSelect // 다중 선택 활성화
-          checkboxSelection // 체크박스 선택 활성화
-          onItemClick={handleItemClick} // 라벨 클릭 시에도 선택 가능하도록 처리
-          isItemDisabled={isItemDisabled}
-          selectedItems={selectedItems}
-          onSelectedItemsChange={handleSelectedItemsChange}
-          onItemSelectionToggle={(event, itemId, isSelected) => {
-            toggledItemRef.current[itemId] = isSelected;
-          }}
-        />
-      </Box>
-    </Stack>
+        </Box>
+      </Stack>
+    </Box>
   );
 };
 
