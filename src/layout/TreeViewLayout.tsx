@@ -2,6 +2,8 @@ import ArticleIcon from "@mui/icons-material/Article";
 import FolderRounded from "@mui/icons-material/FolderRounded";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import IndeterminateCheckBoxIcon from "@mui/icons-material/IndeterminateCheckBox";
 import { alpha, styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
@@ -25,7 +27,6 @@ import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 import { Menu, MenuItem } from "../data/MenuConstant";
 import { convertMenuToTreeItems, convertToTreeItems } from "../utils/MenuUtils";
-
 interface TreeViewLayoutProps {
   apiRef: any;
   onSelectedItemsChange: (
@@ -311,7 +312,11 @@ const TreeViewLayout = ({
             onItemSelectionToggle={(event, itemId, isSelected) => {
               toggledItemRef.current[itemId] = isSelected;
             }}
-            slots={{ item: CustomTreeItem }}
+            slots={{
+              expandIcon: AddBoxIcon,
+              collapseIcon: IndeterminateCheckBoxIcon,
+              item: CustomTreeItem,
+            }}
           />
         </Box>
       </Stack>
