@@ -44,14 +44,16 @@ const TreeViewLayout = ({
   };
 
   const handleItemClick = (event: React.SyntheticEvent, itemId: string) => {
-    if (!selectedItems.includes(itemId)) {
-      handleSelectedItemsChange(event, [...selectedItems, itemId]);
-    } else {
-      handleSelectedItemsChange(
-        event,
-        selectedItems.filter((id) => id !== itemId)
-      );
-    }
+    onSelectedItemsChange(event, itemId);
+
+    // if (!selectedItems.includes(itemId)) {
+    //   handleSelectedItemsChange(event, [...selectedItems, itemId]);
+    // } else {
+    //   handleSelectedItemsChange(
+    //     event,
+    //     selectedItems.filter((id) => id !== itemId)
+    //   );
+    // }
   };
 
   const handleSelectedItemsChange = (
@@ -169,7 +171,7 @@ const TreeViewLayout = ({
             }}
             multiSelect // 다중 선택 활성화
             checkboxSelection // 체크박스 선택 활성화
-            onItemClick={handleItemClick} // 라벨 클릭 시에도 선택 가능하도록 처리
+            onItemClick={handleItemClick}
             isItemDisabled={isItemDisabled}
             selectedItems={selectedItems}
             onSelectedItemsChange={handleSelectedItemsChange}
