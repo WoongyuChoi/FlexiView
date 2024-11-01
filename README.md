@@ -30,7 +30,7 @@ FlexiView aims to streamline the development of responsive and aesthetically ple
 
 2. Navigate into the project directory:
     ```bash
-    cd react-chart-visualizer
+    cd FlexiView
     ```
 
 3. Install dependencies:
