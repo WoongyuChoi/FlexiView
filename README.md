@@ -6,7 +6,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/WoongyuChoi/FlexiView)
 
 <figure align="center">
-    <img src="https://private-user-images.githubusercontent.com/138280607/382238966-0894edb3-8117-4a18-843b-a3dd38452147.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzA0NTI3NDcsIm5iZiI6MTczMDQ1MjQ0NywicGF0aCI6Ii8xMzgyODA2MDcvMzgyMjM4OTY2LTA4OTRlZGIzLTgxMTctNGExOC04NDNiLWEzZGQzODQ1MjE0Ny5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQxMTAxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MTEwMVQwOTE0MDdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0zZmZjYjcwNmI3MjBhZDQ5ZDVmMjhiNWFlNzJlOGZkZTZjMGQ1YWZmYTg3ZjZlNGEyMzBmZTE5OWJlYmE0NjZiJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.FU6F8XZcVhSLOLIzBrGyF9v2enkFDGIJcbhrhGmYViM" width="80%"/>
+    <img src="https://github.com/user-attachments/assets/f7867eb3-aadc-43ae-8eca-16327a5136ad" width="80%"/>
 </figure>
 
 ## Overview
