@@ -1,5 +1,6 @@
+import FolderSpecialTwoToneIcon from "@mui/icons-material/FolderSpecialTwoTone";
+import FolderOpenTwoToneIcon from "@mui/icons-material/FolderOpenTwoTone";
 import ArticleIcon from "@mui/icons-material/Article";
-import FolderRounded from "@mui/icons-material/FolderRounded";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import AddBoxIcon from "@mui/icons-material/AddBox";
@@ -25,7 +26,7 @@ import {
 } from "@mui/x-tree-view/useTreeItem2";
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
-import { Menu, MenuItem } from "../data/MenuConstant";
+import { CustomTreeViewBaseItem, Menu, MenuItem } from "../data/MenuConstant";
 import { convertMenuToTreeItems, convertToTreeItems } from "../utils/MenuUtils";
 interface TreeViewLayoutProps {
   apiRef: any;
@@ -108,12 +109,31 @@ function CustomLabel({
   );
 }
 
+type FileType =
+  | "FolderSpecialTwoTone"
+  | "FolderOpenTwoTone"
+  | "Article"
+  | string
+  | undefined;
+
+const getIconFromFileType = (fileType: FileType) => {
+  switch (fileType) {
+    case "FolderSpecialTwoTone":
+      return FolderSpecialTwoToneIcon;
+    case "FolderOpenTwoTone":
+      return FolderOpenTwoToneIcon;
+    case "Article":
+      return ArticleIcon;
+    default:
+      return ArticleIcon;
+  }
+};
+
 const CustomTreeItem = React.forwardRef(function CustomTreeItem(
   props: CustomTreeItemProps,
   ref: React.Ref<HTMLLIElement>
 ) {
   const { id, itemId, label, disabled, children, ...other } = props;
-  const icon = Boolean(children) ? FolderRounded : ArticleIcon;
   const {
     getRootProps,
     getContentProps,
@@ -123,7 +143,14 @@ const CustomTreeItem = React.forwardRef(function CustomTreeItem(
     getGroupTransitionProps,
     getDragAndDropOverlayProps,
     status,
+    publicAPI,
   } = useTreeItem2({ id, itemId, children, label, disabled, rootRef: ref });
+  const item = publicAPI.getItem(itemId);
+  const icon = item?.fileType
+    ? getIconFromFileType(item?.fileType)
+    : Boolean(children)
+    ? FolderOpenTwoToneIcon
+    : ArticleIcon;
 
   return (
     <TreeItem2Provider itemId={itemId}>
@@ -166,7 +193,9 @@ const TreeViewLayout = ({
   menuData,
 }: TreeViewLayoutProps) => {
   const [lastClickedItem, setLastClickedItem] = useState<string[] | null>([]);
-  const [menuTreeItems, setMenuTreeItems] = useState<TreeViewBaseItem[]>([]);
+  const [menuTreeItems, setMenuTreeItems] = useState<CustomTreeViewBaseItem[]>(
+    []
+  );
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
@@ -252,7 +281,7 @@ const TreeViewLayout = ({
   return (
     <Box
       sx={{
-        width: "350px",
+        width: "325px",
         borderRight: "1px solid #ddd",
         textAlign: "left",
       }}
