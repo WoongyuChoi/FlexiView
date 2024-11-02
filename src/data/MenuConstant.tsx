@@ -1,3 +1,5 @@
+import { TreeViewBaseItem } from "@mui/x-tree-view/models";
+
 export enum MenuTitle {
   mid = "Screen ID",
   mpid = "Parent ID",
@@ -7,6 +9,10 @@ export enum MenuTitle {
   mlevel = "Level",
   morder = "Order",
   misUse = "Usage Status",
+}
+
+export interface CustomTreeViewBaseItem extends TreeViewBaseItem {
+  fileType?: string | undefined;
 }
 
 export interface MenuItem {
