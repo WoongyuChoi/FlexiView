@@ -144,7 +144,7 @@ const TextFieldLayout = ({
                 fullWidth
                 sx={{ marginTop: 2 }}
               >
-                적용
+                Save
               </Button>
             </Box>
           ) : (

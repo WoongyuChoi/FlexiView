@@ -252,7 +252,7 @@ const TreeViewLayout = ({
   return (
     <Box
       sx={{
-        width: "350px",
+        width: "325px",
         borderRight: "1px solid #ddd",
         textAlign: "left",
       }}
