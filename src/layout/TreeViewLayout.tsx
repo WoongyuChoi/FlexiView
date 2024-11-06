@@ -58,6 +58,10 @@ const CustomTreeItemContent = styled(TreeItem2Content)(({ theme }) => ({
     ...theme.applyStyles("light", {
       color: theme.palette.primary.main,
     }),
+    ".MuiTypography-root": {
+      fontWeight: 600,
+      color: "black",
+    }
   },
   [`&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused`]: {
     // backgroundColor: theme.palette.primary.dark,
@@ -65,6 +69,10 @@ const CustomTreeItemContent = styled(TreeItem2Content)(({ theme }) => ({
     // ...theme.applyStyles('light', {
     //   backgroundColor: theme.palette.primary.main,
     // }),
+    ".MuiTypography-root": {
+      fontWeight: 600,
+      color: "#0080FF",
+    }
   },
 }));
 
